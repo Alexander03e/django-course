@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Сериалы{% endblock %}
+{% block content %}
+    
+
+    {% if object %}
+    
+      <div class="film">
+        <div class="swipe-wrapper wrapper-cust"> 
+            <h2 class="display-2 b">{{ object.title }}</h2>
+            <p class="display-6 b">{{ object.subtitle}}</p>
+        </div>
+        <div class="img-container">
+            <img class="film-img"src="{{ object.image.url }}" alt="">
+        </div>
+           <!-- <div class="image">
+              <img src="{{ item.image }}" alt="">
+              <div class="name"><a href="">{{ item.title }}</a></div>
+              <div class="unit">{{ item.subtitle }}</div>
+          </div>  -->
+          
+      
+      
+    {% else %}
+        <p>Информации нет</p>
+    {% endif %}
+    </section>
+{% endblock %}
