@@ -1,14 +1,16 @@
 from django.db import models
+from film.models import Films
+from serials.models import Serials
 
 # Create your models here.
 
-class Liked(models.Model):
-    title = models.CharField('Название', max_length=50)
-    subtitle = models.TextField('Описаниее')
+class Recs(models.Model):
+    name = models.ManyToManyField(Films, verbose_name='Рекомендованные фильмы')
+    nameser = models.ManyToManyField(Serials, verbose_name='Рекомендованные сериалы', null=True)
 
-    def __str__(self):
-        return self.title
-    
+    def get_rec(self):
+        return ",".join([str(p) for p in self.rec.all()])
     class Meta:
-        verbose_name = 'Избранное'
-        verbose_name_plural = 'Избранное'
+        verbose_name = 'Рекомендации'
+        verbose_name_plural = 'Рекомендации'
+    

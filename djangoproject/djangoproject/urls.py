@@ -18,15 +18,24 @@ from django.contrib import admin
 from django.urls import path, include
 from hello import views
 from film import views
-from favorites import views
+# from favorites import views
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
 
+from film.views import FilmViewSet
+
+router = routers.DefaultRouter()
+# router.register(r'films', views.FilmViewSet)
 
 urlpatterns = [
     path('', include('hello.urls')),
+    path('api/', include(router.urls)),
+    path('api/films/', FilmViewSet.as_view()),
     path('films/', include('film.urls')),
     path('serials/', include('serials.urls')),
     path('favorites/', include('favorites.urls')),
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += router.urls

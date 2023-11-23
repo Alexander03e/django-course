@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Liked
+from .models import Recs
 # Register your models here.
-admin.site.register(Liked)
-
+admin.site.register(Recs)

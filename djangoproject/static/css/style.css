@@ -62,8 +62,9 @@ html{
     border:none;
     border-radius:20px;
     padding:10px 110px;   
-    background-color: gray;
+    background-color: transparent;
     transition:0.15s;
+    border: 1px solid white
 }
 .btn-main:hover{
     background-color:white;   

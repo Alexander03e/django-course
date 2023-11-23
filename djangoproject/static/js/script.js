@@ -8,3 +8,19 @@ var swiper = new Swiper(".mySwiper",{
       el: "swiper-pagination"
     }
   });
+
+  $(document).ready(function() {
+    $('.btn-custom').click(function() {
+        var ilm_id = $(this).data('ilm-id');
+        $.ajax({
+            url: '{% url "film:like_film" %}',
+            data: {
+                'ilm_id': ilm_id
+            },
+            dataType: 'json',
+            success: function(data) {
+                alert(data.message);
+            }
+        });
+    });
+});

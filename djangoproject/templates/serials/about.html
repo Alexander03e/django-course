@@ -9,6 +9,25 @@
       <div class="film">
         <div class="swipe-wrapper wrapper-cust"> 
             <h2 class="display-2 b">{{ object.title }}</h2>
+
+            {% if object.is_favorite %}
+            <form action="{% url 'dislike_serial' object.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-izbr btn-custom btn-sm btn-outline-secondary">В избранном</button>
+            </form><br><br>
+            {% else %} 
+            <form action="{% url 'like_serial' object.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-custom btn-sm btn-outline-secondary">В избранное</button>
+              </form><br><br>
+
+            {% endif %}
+            {% for item in object.genre.all %}
+            <p class="display-6 b b--s"><strong>{{ item.name}}</strong></p>
+            {% endfor %}
+            {% for director in object.director.all %}
+            <p class="display-6 b b--s"><strong>Режиссер: </strong><br> {{ director.name}}</p>
+            {% endfor %}
             <p class="display-6 b">{{ object.subtitle}}</p>
         </div>
         <div class="img-container">
