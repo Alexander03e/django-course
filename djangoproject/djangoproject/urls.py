@@ -34,6 +34,7 @@ urlpatterns = [
     path('films/', FilmViewSet.as_view()),
     path('serials/', SerialsViewSet.as_view()),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls'))
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += router.urls
