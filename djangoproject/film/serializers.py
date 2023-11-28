@@ -6,6 +6,13 @@ class FilmsSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Films
-        exclude = ['genre', 'direct']
+        fields = ['title', 'genre', 'is_favorite']
 
+class FilmsDetailSerializer(serializers.ModelSerializer):
 
+    genre = serializers.StringRelatedField(many=True)
+    direct = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Films
+        fields = '__all__'

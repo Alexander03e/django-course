@@ -16,23 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hello import views
+
 from film import views
 # from favorites import views
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
-from serials.views import SerialsViewSet
-from film.views import FilmViewSet
+
+from film.views import FilmsListView
 
 router = routers.DefaultRouter()
 #routers.register(r'films', views.FilmViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('films/', FilmViewSet.as_view()),
-    path('serials/', SerialsViewSet.as_view()),
+    # path('', include(router.urls)),
+    path('api/films/', include('film.urls')),
+    path('api/serials/', include('serials.urls')),
+    # path('films/', FilmsViewSet.as_view()),
+    
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls'))
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

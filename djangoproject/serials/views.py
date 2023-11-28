@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404,redirect
 from .models import Serials
 from rest_framework import generics
 from .serializers import SerialsSerializer
+from .serializers import SerialsDetailSerializer
 from rest_framework import viewsets,routers,serializers
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
 def serials(request):
@@ -11,6 +13,16 @@ def serials(request):
     return render(request, "serials/object.html", {'serials': serials})
 
 
-class SerialsViewSet(generics.ListAPIView):
-    queryset = Serials.objects.all()
-    serializer_class = SerialsSerializer
+class SerialsListView(APIView):
+
+    def get(self, request):
+        serials = Serials.objects.all()
+        serializer = SerialsSerializer(serials, many = True)
+        return Response(serializer.data)
+    
+class SerialsDetailView(APIView):
+
+    def get(self, request, pk):
+        serial = Serials.objects.get(id = pk)
+        serializer = SerialsDetailSerializer(serial)
+        return Response(serializer.data)
