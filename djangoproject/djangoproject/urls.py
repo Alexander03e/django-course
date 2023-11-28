@@ -30,13 +30,9 @@ router = routers.DefaultRouter()
 #routers.register(r'films', views.FilmViewSet)
 
 urlpatterns = [
-    path('', include('hello.urls')),
-    path('api/', include(router.urls)),
-    path('api/films/', FilmViewSet.as_view()),
-    path('api/serials/', SerialsViewSet.as_view()),
-    path('films/', include('film.urls')),
-    path('serials/', include('serials.urls')),
-    path('favorites/', include('favorites.urls')),
+    path('', include(router.urls)),
+    path('films/', FilmViewSet.as_view()),
+    path('serials/', SerialsViewSet.as_view()),
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

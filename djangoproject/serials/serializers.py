@@ -6,4 +6,4 @@ class SerialsSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Serials
-        exclude = ['genre', 'direct']
+        exclude = ['genre']
