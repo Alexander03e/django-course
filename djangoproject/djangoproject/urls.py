@@ -23,15 +23,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
+from serials.views import SerialsViewSet
 from film.views import FilmViewSet
 
 router = routers.DefaultRouter()
-# router.register(r'films', views.FilmViewSet)
+#routers.register(r'films', views.FilmViewSet)
 
 urlpatterns = [
     path('', include('hello.urls')),
     path('api/', include(router.urls)),
     path('api/films/', FilmViewSet.as_view()),
+    path('api/serials/', SerialsViewSet.as_view()),
     path('films/', include('film.urls')),
     path('serials/', include('serials.urls')),
     path('favorites/', include('favorites.urls')),

@@ -1,5 +1,9 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Serials
+from rest_framework import generics
+from .serializers import SerialsSerializer
+from rest_framework import viewsets,routers,serializers
+
 
 # Create your views here.
 def serials(request):
@@ -21,3 +25,7 @@ def dislike_serial(request, serial_id):
     serial.is_favorite = False
     serial.save()
     return redirect('serials')
+
+class SerialsViewSet(generics.ListAPIView):
+    queryset = Serials.objects.all()
+    serializer_class = SerialsSerializer
