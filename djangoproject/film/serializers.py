@@ -10,8 +10,8 @@ class FilmsSerializer(serializers.ModelSerializer):
 
 class FilmsDetailSerializer(serializers.ModelSerializer):
 
-    genre = serializers.StringRelatedField(many=True)
-    direct = serializers.StringRelatedField(many=True)
+    genre = serializers.StringRelatedField(many=True, read_only=True)
+    direct = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Films

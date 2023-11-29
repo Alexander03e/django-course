@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     path('', views.FilmsListView.as_view()),
     path('<int:pk>/', views.FilmsDetailView.as_view()), 
+    
 ]
 

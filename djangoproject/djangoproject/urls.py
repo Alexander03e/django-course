@@ -23,20 +23,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
-
+from serials.views import SerialsListView
 from film.views import FilmsListView
 
 router = routers.DefaultRouter()
+router.register(r'films', FilmsListView, basename='films')
+router.register(r'serials', SerialsListView, basename='serials')
 #routers.register(r'films', views.FilmViewSet)
 
 urlpatterns = [
     # path('', include(router.urls)),
-    path('api/films/', include('film.urls')),
-    path('api/serials/', include('serials.urls')),
-    # path('films/', FilmsViewSet.as_view()),
-    
+    # path('api/films/', include('film.urls')),
+    # path('api/serials/', include('serials.urls')),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls'))
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-urlpatterns += router.urls

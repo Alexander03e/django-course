@@ -1,6 +1,5 @@
 from django.db import models
-
-
+from django.db.models import Q
 # Create your models here.
 
 class Director(models.Model):
@@ -43,3 +42,16 @@ class Films(models.Model):
     
 
 
+#напиши Q запросы
+
+#поиск по режиссеру
+#Director.objects.filter(name__icontains='К')
+
+#поиск по жанру
+#Genre.objects.filter(name__icontains='К')  
+
+#поиск по фильму
+#Films.objects.filter(title__icontains='К')
+
+#поиск по актеру
+#Films.objects.filter(actors__icontains='К')
