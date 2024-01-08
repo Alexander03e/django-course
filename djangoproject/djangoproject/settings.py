@@ -40,13 +40,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages', 
     'django.contrib.staticfiles', #подключение статических файлов
+    #apps
     'film',
-    'serials'
+    'serials',
+    'authentication',
+    #other
+    'rest_framework.authtoken',
+    'djoser',
+    'django_filters',
+    'corsheaders', 
+    'import_export',
+    'simple_history'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -131,11 +141,36 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+     ], 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 4,
-    
+    'PAGE_SIZE': 8,
+    'DEFAULT_FILTER_BACKEND': (
+      'django_filters.rest_framework.DjangoFilterBackend'
+    ),
     'DEFAULT_PERMISSION_CLASSES':[
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    "http://localhost:8000",
+    'http://localhost:5173'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:8000'
+    "http://localhost:8000",
+    'http://localhost:5173',
+]
+
+CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
+                      'content-type', 'accept', 'origin', 'Authorization',
+                      'access-control-allow-methods')
+
+# AUTH_USER_MODEL = 'authentication.User'

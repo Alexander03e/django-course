@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from film import views
 # from favorites import views
@@ -25,17 +25,18 @@ from rest_framework import routers
 
 from serials.views import SerialsListView
 from film.views import FilmsListView
+from .routers import router
 
-router = routers.DefaultRouter()
-router.register(r'films', FilmsListView, basename='films')
-router.register(r'serials', SerialsListView, basename='serials')
-#routers.register(r'films', views.FilmViewSet)
+
 
 urlpatterns = [
     # path('', include(router.urls)),
     # path('api/films/', include('film.urls')),
     # path('api/serials/', include('serials.urls')),
-    path('api/', include(router.urls)),
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/auth', include('djoser.urls')),
+    # path('api/v1/auth-login', include('djoser.urls.authtoken')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

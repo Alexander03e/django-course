@@ -6,7 +6,7 @@ class SerialsSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Serials
-        fields = ['title', 'genre', 'is_favorite']
+        fields = ['id','title', 'genre', 'is_favorite', 'image']
 
 class SerialsDetailSerializer(serializers.ModelSerializer):
 
